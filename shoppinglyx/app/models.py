@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator,MinValueValidator
 from django.db.models.base import Model
+from django.db.models.deletion import CASCADE
 STATE_CHOICES=(
     ('Andaman & Nicobar Islands','Andaman & Nicobar Islands'),
     ('Andhra Pradesh','Andhra Pradesh'),
@@ -67,6 +68,14 @@ class Product(models.Model):
     brand=models.CharField(max_length=100)
     category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
     product_image=models.ImageField(upload_to='productimg')
+
+    def __str__(self):
+        return str(self.id)
+
+class Cart(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    quantity=models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return str(self.id)
