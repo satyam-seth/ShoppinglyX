@@ -47,6 +47,17 @@ def mobile(request,data=None):
         mobiles=Product.objects.filter(category='M').filter(discounted_price__gt=10000)
     return render(request, 'app/mobile.html',{'mobiles':mobiles})
 
+def topwear(request,data=None):
+    if data==None:
+        topwears=Product.objects.filter(category='TW')
+    elif data=='Polo' or data=='Park':
+        topwears=Product.objects.filter(category='TW').filter(brand=data)
+    elif data=='below':
+        topwears=Product.objects.filter(category='TW').filter(discounted_price__lt=500)
+    elif data=='above':
+        topwears=Product.objects.filter(category='TW').filter(discounted_price__gt=500)
+    return render(request, 'app/topwear.html',{'topwears':topwears})
+
 def login(request):
  return render(request, 'app/login.html')
 

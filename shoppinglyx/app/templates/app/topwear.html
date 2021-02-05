@@ -1,21 +1,21 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}Mobile{% endblock title %}
+{% block title %}Top Wear{% endblock title %}
 {% block main-content %}
 <div class="container my-5">
  <div class="row">
   <div class="col-sm-3">
    <div class="list-group">
-        <a href="{% url 'mobile' %}" class="list-group-item list-group-item-action" aria-current="true">All Mobile</a>
-        <a href="{% url 'mobiledata' 'Redmi' %}" class="list-group-item list-group-item-action" aria-current="true">Redmi</a>
-        <a href="{% url 'mobiledata' 'Samsung' %}" class="list-group-item list-group-item-action" aria-current="true">Samsung</a>
-        <a href="{% url 'mobiledata' 'below' %}" class="list-group-item list-group-item-action" aria-current="true">Below 10000</a>
-        <a href="{% url 'mobiledata' 'above' %}" class="list-group-item list-group-item-action" aria-current="true">Above 10000</a>
+        <a href="{% url 'topwear' %}" class="list-group-item list-group-item-action" aria-current="true">All Top Wear</a>
+        <a href="{% url 'topweardata' 'Polo' %}" class="list-group-item list-group-item-action" aria-current="true">Polo</a>
+        <a href="{% url 'topweardata' 'Park' %}" class="list-group-item list-group-item-action" aria-current="true">Park</a>
+        <a href="{% url 'topweardata' 'below' %}" class="list-group-item list-group-item-action" aria-current="true">Below 500</a>
+        <a href="{% url 'topweardata' 'above' %}" class="list-group-item list-group-item-action" aria-current="true">Above 500</a>
     </div>
   </div>
   <div class="col-sm-8">
       <div class="row">
-          {% for product in mobiles %}
+          {% for product in topwears %}
           <div class="col-sm-4 text-center mb-4">
               <a href="{% url 'product-detail' product.id %}" class="btn">
                   <div class="item">
@@ -31,5 +31,5 @@
       </div>
   </div>
  </div>
-</div>  
+</div>
 {% endblock main-content %}
