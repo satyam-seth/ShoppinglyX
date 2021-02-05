@@ -11,8 +11,6 @@ class ProductView(View):
         mobiles=Product.objects.filter(category='M')
         return render(request,'app/home.html',{'topwears':topwears,'bottomwears':bottomwears,'mobiles':mobiles})
 
-# def product_detail(request):
-#  return render(request, 'app/productdetail.html')
 class ProductDeatilView(View):
     def get(self,request,pk):
         product=Product.objects.get(pk=pk)
@@ -68,9 +66,6 @@ def bottomwear(request,data=None):
     elif data=='above':
         bottomwears=Product.objects.filter(category='BW').filter(discounted_price__gt=500)
     return render(request, 'app/bottomwear.html',{'bottomwears':bottomwears})
-
-def login(request):
- return render(request, 'app/login.html')
 
 class CustomerRegistrationView(View):
     def get(self,request):
