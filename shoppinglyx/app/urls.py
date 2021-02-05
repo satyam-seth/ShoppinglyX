@@ -21,6 +21,7 @@ urlpatterns = [
     path('bottomwear/', views.bottomwear, name='bottomwear'),
     path('bottomwear/<slug:data>/', views.bottomwear, name='bottomweardata'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='app/login.html',authentication_form=LoginForm), name='login'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
