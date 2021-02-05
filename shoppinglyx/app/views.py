@@ -19,31 +19,39 @@ class ProductDeatilView(View):
         return render(request,'app/productdetail.html',{'product':product})
 
 def add_to_cart(request):
- return render(request, 'app/addtocart.html')
+    return render(request, 'app/addtocart.html')
 
 def buy_now(request):
- return render(request, 'app/buynow.html')
+    return render(request, 'app/buynow.html')
 
 def profile(request):
- return render(request, 'app/profile.html')
+    return render(request, 'app/profile.html')
 
 def address(request):
- return render(request, 'app/address.html')
+    return render(request, 'app/address.html')
 
 def orders(request):
- return render(request, 'app/orders.html')
+    return render(request, 'app/orders.html')
 
 def change_password(request):
- return render(request, 'app/changepassword.html')
+    return render(request, 'app/changepassword.html')
 
-def mobile(request):
- return render(request, 'app/mobile.html')
+def mobile(request,data=None):
+    if data==None:
+        mobiles=Product.objects.filter(category='M')
+    elif data=='Redmi' or data=='Samsung':
+        mobiles=Product.objects.filter(category='M').filter(brand=data)
+    elif data=='below':
+        mobiles=Product.objects.filter(category='M').filter(discounted_price__lt=10000)
+    elif data=='above':
+        mobiles=Product.objects.filter(category='M').filter(discounted_price__gt=10000)
+    return render(request, 'app/mobile.html',{'mobiles':mobiles})
 
 def login(request):
  return render(request, 'app/login.html')
 
 def customerregistration(request):
- return render(request, 'app/customerregistration.html')
+    return render(request, 'app/customerregistration.html')
 
 def checkout(request):
- return render(request, 'app/checkout.html')
+    return render(request, 'app/checkout.html')
