@@ -17,6 +17,10 @@ class ProductDeatilView(View):
         return render(request,'app/productdetail.html',{'product':product})
 
 def add_to_cart(request):
+    user=request.user
+    product_id=request.GET.get('prod_id')
+    product=Product.objects.get(id=product_id)
+    Cart(user=user,product=product).save()
     return render(request, 'app/addtocart.html')
 
 def buy_now(request):
@@ -24,7 +28,6 @@ def buy_now(request):
 
 def address(request):
     add=Customer.objects.filter(user=request.user)
-    print(add)
     return render(request, 'app/address.html',{'add':add,'active':'btn-primary'})
 
 def orders(request):
