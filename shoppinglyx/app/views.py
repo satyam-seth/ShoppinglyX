@@ -128,6 +128,17 @@ def mobile(request,data=None):
         mobiles=Product.objects.filter(category='M').filter(discounted_price__gt=10000)
     return render(request, 'app/mobile.html',{'mobiles':mobiles})
 
+def laptop(request,data=None):
+    if data==None:
+        laptops=Product.objects.filter(category='L')
+    elif data=='Asus' or data=='Acer':
+        laptops=Product.objects.filter(category='L').filter(brand=data)
+    elif data=='below':
+        laptops=Product.objects.filter(category='L').filter(discounted_price__lt=50000)
+    elif data=='above':
+        laptops=Product.objects.filter(category='L').filter(discounted_price__gt=50000)
+    return render(request, 'app/laptop.html',{'laptops':laptops})
+
 def topwear(request,data=None):
     if data==None:
         topwears=Product.objects.filter(category='TW')
