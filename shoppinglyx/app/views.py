@@ -13,12 +13,17 @@ class ProductView(View):
         topwears=Product.objects.filter(category='TW')
         bottomwears=Product.objects.filter(category='BW')
         mobiles=Product.objects.filter(category='M')
-        return render(request,'app/home.html',{'topwears':topwears,'bottomwears':bottomwears,'mobiles':mobiles})
+        laptops=Product.objects.filter(category='L')
+        return render(request,'app/home.html',{'topwears':topwears,'bottomwears':bottomwears,'mobiles':mobiles,'laptops':laptops})
 
 class ProductDeatilView(View):
     def get(self,request,pk):
         product=Product.objects.get(pk=pk)
-        return render(request,'app/productdetail.html',{'product':product})
+        item_already_in_cart=False
+        if request.user.is_authenticated:
+            item_already_in_cart=Cart.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
+        return render(request,'app/productdetail.html',{'product':product,'item_already_in_cart':item_already_in_cart})
+
 @login_required
 def add_to_cart(request):
     user=request.user
